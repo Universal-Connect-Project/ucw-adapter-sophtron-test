@@ -47,5 +47,4 @@ jobs:
 
       - name: Run Jest Tests
         run: |
-          npm run build
           npm run test

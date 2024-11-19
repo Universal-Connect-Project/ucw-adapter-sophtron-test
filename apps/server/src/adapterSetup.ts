@@ -1,33 +1,34 @@
 import { getMxAdapterMapObject } from "@ucp-npm/mx-adapter";
 import { getSophtronAdapterMapObject } from "@ucp-npm/sophtron-adapter";
 import { getTemplateAdapterMapObject } from "@ucp-npm/template-adapter";
-import { adapterMapObject as testAdapterMapObject } from "./test-adapter";
+import type { AdapterMap } from "@repo/utils";
+
+import {adapterMapObject as testAdapterMapObject } from "./test-adapter";
 import config from "./config";
 import { get, set } from "./services/storageClient/redis";
 import * as logger from "./infra/logger";
-import * as http from "./infra/http";
 
 const templateAdapterMapObject = getTemplateAdapterMapObject();
 
-const sophtronAdapterMapObject = getSophtronAdapterMapObject({
-  logClient: logger,
-  httpClient: http,
-  aggregatorCredentials: {
-    sophtron: {
-      clientId: config.SophtronApiUserId,
-      secret: config.SophtronApiUserSecret,
-      endpoint: config.SophtronApiServiceEndpoint,
-      vcEndpoint: config.SophtronVCServiceEndpoint,
-      aggregator: "sophtron",
-      available: true,
+const sophtronAdapterMapObject: Record<string, AdapterMap> =
+  getSophtronAdapterMapObject({
+    logClient: logger,
+    aggregatorCredentials: {
+      sophtron: {
+        clientId: config.SophtronApiUserId,
+        secret: config.SophtronApiUserSecret,
+        endpoint: config.SophtronApiServiceEndpoint,
+        vcEndpoint: config.SophtronVCServiceEndpoint,
+        aggregator: "sophtron",
+        available: true,
+      },
     },
-  },
-  envConfig: {
-    HOSTURL: config.HOSTURL,
-  },
-});
+    envConfig: {
+      HOSTURL: config.HOSTURL,
+    },
+  });
 
-const mxAdapterMapObject = getMxAdapterMapObject({
+const mxAdapterMapObject: Record<string, AdapterMap> = getMxAdapterMapObject({
   cacheClient: {
     set: set,
     get: get,
