@@ -11,9 +11,6 @@ export const getVc = async (path: string, args: VCDependencies) => {
   const { aggregatorCredentials } = args;
   const { clientId, secret, vcEndpoint } = aggregatorCredentials;
 
-  console.log("clientId", clientId);
-  console.log("secret", secret);
-  console.log("vcEndpoint", vcEndpoint);
   const sophtronClient = new SophtronClient(args as AdapterDependencies);
 
   const res = await sophtronClient.getUserIntegrationKey();

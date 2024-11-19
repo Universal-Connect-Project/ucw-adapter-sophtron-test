@@ -83,8 +83,7 @@ export default class HttpClient implements IHttpClient {
 
   async del(url, headers) {
     try {
-      const response = await this.httpInstance.delete(url, { headers });
-      return response;
+      return await this.httpInstance.delete(url, { headers });
     } catch (error) {
       this.logClient.error(`error from ${url}`, error);
       throw error;

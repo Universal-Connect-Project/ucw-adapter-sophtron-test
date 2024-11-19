@@ -49,7 +49,7 @@ export default class SophtronBaseClient {
     );
   }
 
-  async put(path: string, data) {
+  async put(path: string, data: any) {
     const authHeader = this.getAuthHeaders("put", path);
     return await this.httpClient.put(
       this.apiConfig.endpoint + path,
