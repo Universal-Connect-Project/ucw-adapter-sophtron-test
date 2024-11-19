@@ -182,6 +182,16 @@ export interface UpdateConnectionRequest {
   challenges?: Challenge[];
 }
 
+export interface VCAdapterInput {
+  accountId?: string;
+  connectionId?: string;
+  endTime?: string;
+  aggregator: Record<string, AdapterMap>;
+  startTime?: string;
+  type: VCDataTypes;
+  userId: string;
+}
+
 export interface WidgetAdapter {
   ResolveUserId: (id: string, failIfNotFound?: boolean) => Promise<string>;
   GetInstitutionById: (id: string) => Promise<Institution>;

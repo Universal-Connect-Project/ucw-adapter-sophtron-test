@@ -4,11 +4,11 @@ import { SophtronAdapter } from "./adapter";
 import { createSophtronVC } from "./createVc";
 import type { AdapterDependencies } from "./models";
 
-export const getSophtronAdapterMapObject = async (dependencies: AdapterDependencies) => {
+export const getSophtronAdapterMapObject = (dependencies: AdapterDependencies) => {
   return {
     sophtron: {
       testInstitutionAdapterName: "sophtron",
-      vcAdapter: await createSophtronVC(dependencies),
+      vcAdapter: createSophtronVC(dependencies),
       widgetAdapter: new SophtronAdapter({
         dependencies,
       })

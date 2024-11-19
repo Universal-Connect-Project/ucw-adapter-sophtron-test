@@ -2,7 +2,7 @@ import type { VCDependencies } from "models";
 import { getVc as getSophtronVc } from "./getVc";
 import { VCDataTypes } from "@repo/utils";
 
-export const createSophtronVC = async (dependencies: VCDependencies) => {
+export const createSophtronVC = (dependencies: VCDependencies) => {
   return async ({
      accountId,
      connectionId,
