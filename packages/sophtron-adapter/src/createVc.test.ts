@@ -2,7 +2,6 @@ import { VCDataTypes } from "@repo/utils";
 
 import type { AdapterDependencies } from "./models";
 import { logClient } from "./test/utils/logClient";
-import { httpClient } from "./test/utils/httpClient";
 import { aggregatorCredentials } from "./adapter.test";
 import { createSophtronVC } from "./createVc";
 
@@ -14,7 +13,6 @@ import {
 
 const dependencies: AdapterDependencies = {
   logClient,
-  httpClient,
   aggregatorCredentials,
   envConfig: {
     HOSTURL: undefined,

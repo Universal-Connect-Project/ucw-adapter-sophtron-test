@@ -1,7 +1,6 @@
-import { httpClient } from "test/utils/httpClient";
-import { logClient } from "test/utils/logClient";
+import { logClient } from "./test/utils/logClient";
 import { sophtronVcTranscationsData } from "./test/testData/sophtronVcData";
-import { aggregatorCredentials } from "adapter.test";
+import { aggregatorCredentials } from "./adapter.test";
 import { getVc } from "./getVc";
 
 describe("Sophtron Vc Client", () => {
@@ -10,7 +9,6 @@ describe("Sophtron Vc Client", () => {
       "customers/userId/accounts/accountId/transactions",
       {
         logClient,
-        httpClient,
         aggregatorCredentials,
         envConfig: {
           HOSTURL: undefined,

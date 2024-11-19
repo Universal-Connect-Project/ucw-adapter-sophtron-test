@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { AdapterConfig, VCDependencies } from "models";
+import type { AdapterDependencies, VCDependencies } from "models";
 import { buildSophtronAuthCode } from "./utils";
 import SophtronClient from "./apiClient.v1";
 
@@ -9,9 +9,12 @@ interface VcResponse {
 
 export const getVc = async (path: string, args: VCDependencies) => {
   const { aggregatorCredentials } = args;
-  const { clientId, secret, vcEndpoint } = aggregatorCredentials.sophtron;
+  const { clientId, secret, vcEndpoint } = aggregatorCredentials;
 
-  const sophtronClient = new SophtronClient(args as AdapterConfig);
+  console.log("clientId", clientId);
+  console.log("secret", secret);
+  console.log("vcEndpoint", vcEndpoint);
+  const sophtronClient = new SophtronClient(args as AdapterDependencies);
 
   const res = await sophtronClient.getUserIntegrationKey();
   const headers = {

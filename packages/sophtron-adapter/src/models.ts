@@ -25,7 +25,7 @@ export type LogClient = {
   warning: (message: string, data?: any) => void;
 };
 
-export type HttpClient = {
+export type IHttpClient = {
   get: (url: string, headers?: any) => Promise<any | undefined>;
   post: (url: string, data?: any, headers?: any) => Promise<any | undefined>;
   put: (url: string, data: any, headers?: any) => Promise<any | undefined>;
@@ -36,8 +36,7 @@ export type HttpClient = {
 
 export type AdapterDependencies = {
   logClient?: LogClient;
-  httpClient?: HttpClient;
-  aggregatorCredentials?: Record<string, ApiCredentials>;
+  aggregatorCredentials?: ApiCredentials;
   envConfig?: Record<string, string>;
 };
 

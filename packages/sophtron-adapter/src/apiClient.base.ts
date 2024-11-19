@@ -1,19 +1,24 @@
-import type { AdapterConfig, HttpClient, LogClient } from "models";
+import type {
+  AdapterDependencies,
+  IHttpClient,
+  LogClient,
+} from "./models";
 import { buildSophtronAuthCode } from "./utils";
+import HttpClient from "./httpClient";
 
 export default class SophtronBaseClient {
   apiConfig: any;
   logClient: LogClient;
-  httpClient: HttpClient;
+  httpClient: IHttpClient;
   envConfig: Record<string, string>;
 
-  constructor(args: AdapterConfig) {
-    const { dependencies } = args;
+  constructor(args: AdapterDependencies) {
+    const { aggregatorCredentials, logClient, envConfig } = args;
 
-    this.apiConfig = dependencies.aggregatorCredentials;
-    this.logClient = dependencies.logClient;
-    this.httpClient = dependencies.httpClient;
-    this.envConfig = dependencies.envConfig;
+    this.apiConfig = aggregatorCredentials;
+    this.logClient = logClient;
+    this.envConfig = envConfig;
+    this.httpClient = new HttpClient(args);
   }
 
   getAuthHeaders(method: string, path: string) {
@@ -27,7 +32,7 @@ export default class SophtronBaseClient {
     };
   }
 
-  async post(path: string, data?) {
+  async post(path: string, data?: any) {
     const authHeader = this.getAuthHeaders("post", path);
     return await this.httpClient.post(
       this.apiConfig.endpoint + path,

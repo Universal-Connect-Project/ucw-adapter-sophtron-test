@@ -86,7 +86,7 @@ export async function resolveInstitutionAggregator(
   ] as InstitutionAggregator
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const testAdapterName = (adapterMap[aggregator] as any)
+  const testAdapterName = (adapterMap[aggregator as keyof typeof adapterMap] as any)
     ?.testInstitutionAdapterName
 
   if (testAdapterName && institution.is_test_bank) {

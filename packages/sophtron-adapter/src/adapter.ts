@@ -35,9 +35,7 @@ function fromSophtronInstitution(ins: any): Institution | undefined {
 
 export class SophtronAdapter implements WidgetAdapter {
   aggregator = "sophtron";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   apiClient: SophtronClient;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   apiClientV1: SophtronClientV1;
   logClient: LogClient;
   envConfig: Record<string, string>;
@@ -48,8 +46,8 @@ export class SophtronAdapter implements WidgetAdapter {
 
     this.logClient = dependencies.logClient;
     this.envConfig = dependencies.envConfig;
-    this.apiClient = new SophtronClient(args);
-    this.apiClientV1 = new SophtronClientV1(args);
+    this.apiClient = new SophtronClient(dependencies);
+    this.apiClientV1 = new SophtronClientV1(dependencies);
   }
 
   async GetInstitutionById(id: string): Promise<Institution> {

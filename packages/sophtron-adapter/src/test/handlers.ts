@@ -18,7 +18,6 @@ import {
   sophtronVcTranscationsData,
 } from "./testData/sophtronVcData";
 
-
 const SOPHTRON_V2_BASE_PATH = "https://api.sophtron.com/api/v2";
 const SOPHTRON_V1_BASE_PATH = "https://api.sophtron.com/api";
 

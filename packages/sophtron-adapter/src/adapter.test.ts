@@ -31,24 +31,22 @@ import {
 } from "./test/testData/sophtronMember";
 import { server } from "./test/testServer";
 import { SophtronAdapter } from "./adapter";
+import type { ApiCredentials } from "models";
 
 import { logClient } from "./test/utils/logClient";
-import { httpClient } from "./test/utils/httpClient";
 
-export const aggregatorCredentials = {
-  sophtron: {
-    username: null,
-    password: null,
-    basePath: "https://int-api.mx.com",
-    vcEndpoint: "https://int-api.mx.com/",
-    aggregator: "mx_int",
-    available: true,
-  }
-}
+export const aggregatorCredentials: ApiCredentials = {
+  clientId: "testClientId",
+  secret: "testSecret",
+  endpoint: "https://api.sophtron.com/api",
+  vcEndpoint: "https://vc.sophtron.com/api/",
+  aggregator: "sophtron",
+  available: true,
+};
+
 const adapter = new SophtronAdapter({
   dependencies: {
     logClient,
-    httpClient,
     aggregatorCredentials,
     envConfig: {
       HOSTURL: undefined,
