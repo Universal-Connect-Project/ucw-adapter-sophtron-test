@@ -14,14 +14,12 @@ const sophtronAdapterMapObject: Record<string, AdapterMap> =
   getSophtronAdapterMapObject({
     logClient: logger,
     aggregatorCredentials: {
-      sophtron: {
-        clientId: config.SophtronApiUserId,
-        secret: config.SophtronApiUserSecret,
-        endpoint: config.SophtronApiServiceEndpoint,
-        vcEndpoint: config.SophtronVCServiceEndpoint,
-        aggregator: "sophtron",
-        available: true,
-      },
+      clientId: config.SophtronApiUserId,
+      secret: config.SophtronApiUserSecret,
+      endpoint: config.SophtronApiServiceEndpoint,
+      vcEndpoint: config.SophtronVCServiceEndpoint,
+      aggregator: "sophtron",
+      available: true,
     },
     envConfig: {
       HOSTURL: config.HOSTURL,
