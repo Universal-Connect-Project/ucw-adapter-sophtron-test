@@ -4,6 +4,7 @@ import type {
   UpdateConnectionRequest,
 } from "@repo/utils";
 import { ChallengeType, ConnectionStatus } from "@repo/utils";
+
 import {
   SOPHTRON_ANSWER_JOB_MFA_PATH,
   SOPHTRON_CREATE_CUSTOMER_PATH,
@@ -31,7 +32,8 @@ import {
 } from "./test/testData/sophtronMember";
 import { server } from "./test/testServer";
 import { SophtronAdapter } from "./adapter";
-import type { ApiCredentials } from "models";
+import type { ApiCredentials } from "./models";
+import { testDataValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
 
 import { logClient } from "./test/utils/logClient";
 
@@ -61,6 +63,7 @@ const testUserInstitutionId = "testUserInstitutionId";
 const usernameValue = "testUsernameValue";
 const passwordValue = "passwordValue";
 const accountsReadyStatus = "AccountsReady";
+const dataValidators = adapter.DataValidators;
 
 describe("sophtron adapter", () => {
   describe("GetInstitutionById", () => {
@@ -991,6 +994,71 @@ describe("sophtron adapter", () => {
       await expect(
         async () => await adapter.ResolveUserId(userId, true),
       ).rejects.toThrow("User not resolved successfully");
+    });
+  });
+
+  describe("DataValidators", () => {
+    it("returns an object of validator functions", async () => {
+      const handlers: Record<string, (req: any, res: any) => void> =
+        adapter.DataValidators;
+      expect(Object.keys(handlers)).toHaveLength(1);
+    });
+
+    describe("transactionValidator", () => {
+      it("returns transaction data, if it passes the transactionValidator", async () => {
+        const validatorSpy = jest.spyOn(dataValidators, 'transactionValidator');
+        const req = {
+          query: {
+            start_time: "testStartTime",
+            end_time: "testEndTime",
+          },
+        };
+
+        const res = {
+          send: jest.fn(),
+          status: jest.fn(),
+        } as unknown as any;
+
+        dataValidators.transactionValidator(req, res);
+
+        expect(validatorSpy).toHaveBeenCalledWith(req, res);
+      });
+
+      it("fails aggregator's transactionValidator if start_time is undefined", async () => {
+        const req = {
+          query: {
+            start_time: undefined,
+            end_time: "testEndTime",
+          },
+        };
+
+        const res = {
+          send: jest.fn(),
+          status: jest.fn(),
+        } as unknown as any;
+
+        dataValidators.transactionValidator(req, res);
+
+        expect(res.send).toHaveBeenCalledWith(testDataValidatorStartTimeError);
+      });
+
+      it("fails aggregator's transactionValidator if end_time is undefined", async () => {
+        const req = {
+          query: {
+            start_time: "testStartTime",
+            end_time: undefined,
+          },
+        };
+
+        const res = {
+          send: jest.fn(),
+          status: jest.fn(),
+        } as unknown as any;
+
+        dataValidators.transactionValidator(req, res);
+
+        expect(res.send).toHaveBeenCalledWith(testDataValidatorEndTimeError);
+      });
     });
   });
 });

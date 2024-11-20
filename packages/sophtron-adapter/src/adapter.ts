@@ -55,7 +55,7 @@ export class SophtronAdapter implements WidgetAdapter {
   DataValidators = {
     transactionValidator: (req: any, res: any) => {
       const schema = Joi.object({
-        end_time:Joi.string().required(),
+        end_time: Joi.string().required(),
         start_time: Joi.string().required(),
       });
 
