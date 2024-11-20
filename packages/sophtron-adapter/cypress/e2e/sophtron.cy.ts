@@ -1,33 +1,67 @@
 import { JobTypes } from "@repo/utils";
-import generateVcDataTests from "../shared/utils/generateVcDataTests";
-import { enterMxCredentials, searchAndSelectMx } from "../shared/utils/sophtron";
-import { refreshAConnection } from "../shared/utils/refresh";
-import { clickContinue, expectConnectionSuccess } from "../shared/utils/widget";
+import { generateVcDataTests, visitAgg } from "@repo/utils-dev-dependency";
+import {
+  expectConnectionSuccess,
+  clickContinue,
+  searchByText,
+  refreshAConnection,
+} from "@repo/utils-dev-dependency";
+import {
+  enterSophtronCredentials,
+  searchAndSelectSophtron,
+  selectSophtronAccount,
+} from "../shared/utils/sophtron";
 
 const makeAConnection = async (jobType) => {
-  searchAndSelectMx();
-  enterMxCredentials();
+  searchAndSelectSophtron();
+  enterSophtronCredentials();
   clickContinue();
 
-  if ([JobTypes.ALL, JobTypes.VERIFICATION].includes(jobType)) {
-    cy.findByText("Checking").click();
+  if ([JobTypes.VERIFICATION].includes(jobType)) {
+    selectSophtronAccount();
     clickContinue();
   }
   expectConnectionSuccess();
 };
 
-describe("mx aggregator", () => {
-  generateVcDataTests({ makeAConnection });
-
-  // Test the RouteHandler route handlers
-  it("tests the jobsRouteHandler method of the RouteHandler", () => {
-
-  });
-
-  it("refreshes an mx connection if given the correct parameters and hides the back button", () => {
+describe("Sophtron aggregator", () => {
+  it("refreshes a sophtron connection if given the correct parameters and hides the back button", () => {
     refreshAConnection({
-      enterCredentials: enterMxCredentials,
-      selectInstitution: searchAndSelectMx
+      enterCredentials: enterSophtronCredentials,
+      selectInstitution: searchAndSelectSophtron,
     });
   });
+
+  it("Connects to Sophtron Bank with all MFA options", () => {
+    visitAgg({});
+    searchByText("Sophtron Bank");
+    cy.findByLabelText("Add account with Sophtron Bank").first().click();
+    cy.findByLabelText("User ID").type("asdfg12X");
+    cy.findByText("Password").type("asdfg12X");
+    clickContinue();
+
+    cy.findByRole("textbox", {
+      name: "Please enter the Captcha code",
+      timeout: 45000,
+    }).type("asdf");
+    clickContinue();
+
+    cy.findByLabelText("What is your favorite color?", { timeout: 45000 }).type(
+      "asdf",
+    );
+    clickContinue();
+
+    cy.findByText("xxx-xxx-1234", { timeout: 45000 }).click();
+    clickContinue();
+
+    cy.findByRole("textbox", {
+      name: "Please enter the Token",
+      timeout: 45000,
+    }).type("asdf");
+    clickContinue();
+
+    expectConnectionSuccess();
+  });
+
+  generateVcDataTests({ makeAConnection });
 });

@@ -33,7 +33,7 @@ describe("Sophtron aggregator", () => {
   });
 
   it("Connects to Sophtron Bank with all MFA options", () => {
-    visitAgg();
+    visitAgg({});
     searchByText("Sophtron Bank");
     cy.findByLabelText("Add account with Sophtron Bank").first().click();
     cy.findByLabelText("User ID").type("asdfg12X");

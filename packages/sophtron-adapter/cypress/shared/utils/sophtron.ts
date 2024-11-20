@@ -1,11 +1,29 @@
-import { searchByText } from './widget'
+import {
+  expectConnectionSuccess,
+  clickContinue,
+  searchByText,
+} from "@repo/utils-dev-dependency";
 
-export const searchAndSelectMx = () => {
-  searchByText('MX Bank')
-  cy.findByLabelText('Add account with MX Bank').first().click()
-}
+export const searchAndSelectSophtron = () => {
+  searchByText("Sophtron Bank NoMFA");
+  cy.findByLabelText("Add account with Sophtron Bank NoMFA").first().click();
+};
 
-export const enterMxCredentials = () => {
-  cy.findByLabelText('LOGIN').type('mxuser')
-  cy.findByLabelText('PASSWORD').type('correct')
-}
+export const enterSophtronCredentials = () => {
+  cy.findByLabelText("User ID").type("asdf");
+  cy.findByText("Password").type("asdf");
+};
+
+export const selectSophtronAccount = () => {
+  cy.findByText("Primary Checking 1234", { timeout: 45000 }).click();
+};
+
+export const connectToSophtron = () => {
+  searchAndSelectSophtron();
+
+  enterSophtronCredentials();
+
+  clickContinue();
+
+  expectConnectionSuccess();
+};
