@@ -33,7 +33,7 @@ import {
 import { server } from "./test/testServer";
 import { SophtronAdapter } from "./adapter";
 import type { ApiCredentials } from "./models";
-import { testDataValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
+import { SOPHTRON_ADAPTER_NAME, testDataValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
 
 import { logClient } from "./test/utils/logClient";
 
@@ -42,7 +42,7 @@ export const aggregatorCredentials: ApiCredentials = {
   secret: "testSecret",
   endpoint: "https://api.sophtron.com/api",
   vcEndpoint: "https://vc.sophtron.com/api/",
-  aggregator: "sophtron",
+  aggregator: SOPHTRON_ADAPTER_NAME,
   available: true,
 };
 
@@ -74,7 +74,7 @@ describe("sophtron adapter", () => {
         id: sophtronInstitutionData.InstitutionID,
         logo_url: sophtronInstitutionData.Logo,
         name: sophtronInstitutionData.InstitutionName,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
         url: sophtronInstitutionData.URL,
       });
     });
@@ -267,7 +267,7 @@ describe("sophtron adapter", () => {
         cur_job_id: "jobId",
         institution_code: "testId",
         status: ConnectionStatus.CREATED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
 
       expect(createMemberPayload).toEqual({
@@ -363,7 +363,7 @@ describe("sophtron adapter", () => {
         cur_job_id: updateMemberData.JobID,
         id: updateMemberData.MemberID,
         institution_code: "institution_code",
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
   });
@@ -385,7 +385,7 @@ describe("sophtron adapter", () => {
       expect(response).toEqual({
         id: getMemberData.MemberID,
         institution_code: getMemberData.InstitutionID,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
         user_id: testUserId,
       });
 
@@ -408,7 +408,7 @@ describe("sophtron adapter", () => {
       expect(response).toEqual({
         id: getMemberData.MemberID,
         institution_code: getMemberData.InstitutionID,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
         user_id: testUserId,
       });
     });
@@ -436,7 +436,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CONNECTED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -463,7 +463,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.FAILED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -491,7 +491,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CREATED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -535,7 +535,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -577,7 +577,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -620,7 +620,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -664,7 +664,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -705,7 +705,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -743,7 +743,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
 
@@ -781,7 +781,7 @@ describe("sophtron adapter", () => {
         user_id: testUserId,
         cur_job_id: testJobId,
         status: ConnectionStatus.CHALLENGED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       });
     });
   });
@@ -809,7 +809,7 @@ describe("sophtron adapter", () => {
       user_id: testUserId,
       cur_job_id: testJobId,
       status: ConnectionStatus.CREATED,
-      aggregator: "sophtron",
+      aggregator: SOPHTRON_ADAPTER_NAME,
     });
   });
 

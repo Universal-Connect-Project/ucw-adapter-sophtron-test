@@ -14,32 +14,20 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
-import { configure } from '@testing-library/cypress'
+import { configure } from "@testing-library/cypress";
 
-configure({ testIdAttribute: 'data-test' })
+configure({ testIdAttribute: "data-test" });
 
-Cypress.on('uncaught:exception', () => {
+Cypress.on("uncaught:exception", () => {
   // returning false here prevents Cypress from
   // failing the test
-  return false
-})
+  return false;
+});
 
 beforeEach(() => {
-  Cypress.env('userId', crypto.randomUUID())
-})
+  Cypress.env("userId", crypto.randomUUID());
+});
 
-afterEach(() => {
-  const aggregator = 'mx_int';
-  const userId = Cypress.env('userId')
-
-  cy.request({
-    method: 'DELETE',
-    url: `/api/aggregator/${aggregator}/user/${userId}`,
-    failOnStatusCode: false
-  }).should((response) => {
-    expect(response.status).to.be.oneOf([200, 204, 400])
-  })
-})
-
+afterEach(() => {});

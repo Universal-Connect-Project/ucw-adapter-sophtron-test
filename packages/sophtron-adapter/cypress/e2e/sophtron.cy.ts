@@ -1,6 +1,7 @@
 import { JobTypes } from "@repo/utils";
-import { generateVcDataTests, visitAgg } from "@repo/utils-dev-dependency";
 import {
+  generateVcDataTests,
+  visitAgg,
   expectConnectionSuccess,
   clickContinue,
   searchByText,

@@ -25,10 +25,9 @@ Import the `adapterMapObject` for sophtron:
 import { getSophtronAdapterMapObject } from "@ucp-npm/sophtron-adapter";
 ```
 
-Also import the cache client, and logger:
+Import the logger:
 
 ```typescript
-import { get, set } from "./services/storageClient/redis";
 import * as logger from "./infra/logger";
 ```
 
@@ -36,10 +35,6 @@ Next, look for the line that starts with `export const adapterMap = {`, and add 
 
 ```typescript
 const sophtronAdapterMapObject = getSophtronAdapterMapObject({
-    cacheClient: {
-        set: set,
-        get: get,
-    },
     logClient: logger,
     aggregatorCredentials: {
         sophtron: {
@@ -62,7 +57,7 @@ export const adapterMap = {
 };
 ````
 
-The dependencies `cacheClient` and `logClient` are provided by the Universal Connect Widget.
+The `logClient` dependency is provided by the Universal Connect Widget.
 
 ## Published NPM Package
 

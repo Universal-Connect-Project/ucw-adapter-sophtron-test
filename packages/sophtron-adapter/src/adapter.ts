@@ -17,6 +17,7 @@ import {
 } from "@repo/utils";
 
 import type { AdapterConfig, LogClient } from "./models";
+import { SOPHTRON_ADAPTER_NAME } from "./constants";
 
 import SophtronClientV1 from "./apiClient.v1";
 import SophtronClient from "./apiClient.v2";
@@ -31,12 +32,12 @@ function fromSophtronInstitution(ins: any): Institution | undefined {
     logo_url: ins.Logo,
     name: ins.InstitutionName,
     url: ins.URL,
-    aggregator: "sophtron",
+    aggregator: SOPHTRON_ADAPTER_NAME,
   };
 }
 
 export class SophtronAdapter implements WidgetAdapter {
-  aggregator = "sophtron";
+  aggregator = SOPHTRON_ADAPTER_NAME;
   apiClient: SophtronClient;
   apiClientV1: SophtronClientV1;
   logClient: LogClient;
@@ -139,7 +140,7 @@ export class SophtronAdapter implements WidgetAdapter {
         cur_job_id: ret.JobID,
         institution_code: request.institution_id,
         status: ConnectionStatus.CREATED,
-        aggregator: "sophtron",
+        aggregator: SOPHTRON_ADAPTER_NAME,
       };
     }
     return undefined;
@@ -178,7 +179,7 @@ export class SophtronAdapter implements WidgetAdapter {
       id: ret.MemberID,
       cur_job_id: ret.JobID,
       institution_code: "institution_code", // TODO
-      aggregator: "sophtron",
+      aggregator: SOPHTRON_ADAPTER_NAME,
     };
   }
 
@@ -190,7 +191,7 @@ export class SophtronAdapter implements WidgetAdapter {
     return {
       id: m.MemberID,
       institution_code: m.InstitutionID,
-      aggregator: "sophtron",
+      aggregator: SOPHTRON_ADAPTER_NAME,
       user_id: userId,
     };
   }
@@ -301,7 +302,7 @@ export class SophtronAdapter implements WidgetAdapter {
       cur_job_id: job.JobID,
       status,
       challenges: challenge?.id ? [challenge] : undefined,
-      aggregator: "sophtron",
+      aggregator: SOPHTRON_ADAPTER_NAME,
     };
   }
 
