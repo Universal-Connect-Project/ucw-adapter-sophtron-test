@@ -1,3 +1,5 @@
+import he from "he";
+import Joi from "joi";
 import type {
   Challenge,
   Connection,
@@ -49,6 +51,23 @@ export class SophtronAdapter implements WidgetAdapter {
     this.apiClient = new SophtronClient(dependencies);
     this.apiClientV1 = new SophtronClientV1(dependencies);
   }
+
+  DataValidators = {
+    transactionValidator: (req: any, res: any) => {
+      const schema = Joi.object({
+        end_time:Joi.string().required(),
+        start_time: Joi.string().required(),
+      });
+
+      const { error } = schema.validate(req.query);
+
+      if (error) {
+        res.status(400);
+        res.send(he.encode(error.details[0].message));
+        return;
+      }
+    },
+  };
 
   async GetInstitutionById(id: string): Promise<Institution> {
     const ins = await this.apiClientV1.getInstitutionById(id);
