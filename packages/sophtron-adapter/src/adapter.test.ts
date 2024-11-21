@@ -33,7 +33,7 @@ import {
 import { server } from "./test/testServer";
 import { SophtronAdapter } from "./adapter";
 import type { ApiCredentials } from "./models";
-import { SOPHTRON_ADAPTER_NAME, testDataValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
+import { SOPHTRON_ADAPTER_NAME, testDataRequestValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
 
 import { logClient } from "./test/utils/logClient";
 
@@ -63,7 +63,7 @@ const testUserInstitutionId = "testUserInstitutionId";
 const usernameValue = "testUsernameValue";
 const passwordValue = "passwordValue";
 const accountsReadyStatus = "AccountsReady";
-const dataValidators = adapter.DataValidators;
+const dataRequestValidators = adapter.DataRequestValidators;
 
 describe("sophtron adapter", () => {
   describe("GetInstitutionById", () => {
@@ -997,16 +997,16 @@ describe("sophtron adapter", () => {
     });
   });
 
-  describe("DataValidators", () => {
+  describe("DataRequestValidators", () => {
     it("returns an object of validator functions", async () => {
       const handlers: Record<string, (req: any, res: any) => void> =
-        adapter.DataValidators;
+        adapter.DataRequestValidators;
       expect(Object.keys(handlers)).toHaveLength(1);
     });
 
     describe("transactionValidator", () => {
       it("returns transaction data, if it passes the transactionValidator", async () => {
-        const validatorSpy = jest.spyOn(dataValidators, 'transactionValidator');
+        const validatorSpy = jest.spyOn(dataRequestValidators, 'transactions');
         const req = {
           query: {
             start_time: "testStartTime",
@@ -1019,7 +1019,7 @@ describe("sophtron adapter", () => {
           status: jest.fn(),
         } as unknown as any;
 
-        dataValidators.transactionValidator(req, res);
+        dataRequestValidators.transactions(req, res);
 
         expect(validatorSpy).toHaveBeenCalledWith(req, res);
       });
@@ -1037,7 +1037,7 @@ describe("sophtron adapter", () => {
           status: jest.fn(),
         } as unknown as any;
 
-        dataValidators.transactionValidator(req, res);
+        dataRequestValidators.transactions(req, res);
 
         expect(res.send).toHaveBeenCalledWith(testDataValidatorStartTimeError);
       });
@@ -1055,9 +1055,9 @@ describe("sophtron adapter", () => {
           status: jest.fn(),
         } as unknown as any;
 
-        dataValidators.transactionValidator(req, res);
+        dataRequestValidators.transactions(req, res);
 
-        expect(res.send).toHaveBeenCalledWith(testDataValidatorEndTimeError);
+        expect(res.send).toHaveBeenCalledWith(testDataRequestValidatorEndTimeError);
       });
     });
   });

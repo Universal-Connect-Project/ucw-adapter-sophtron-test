@@ -53,8 +53,8 @@ export class SophtronAdapter implements WidgetAdapter {
     this.apiClientV1 = new SophtronClientV1(dependencies);
   }
 
-  DataValidators = {
-    transactionValidator: (req: any, res: any) => {
+  DataRequestValidators = {
+    transactions: (req: any) => {
       const schema = Joi.object({
         end_time: Joi.string().required(),
         start_time: Joi.string().required(),
@@ -63,9 +63,10 @@ export class SophtronAdapter implements WidgetAdapter {
       const { error } = schema.validate(req.query);
 
       if (error) {
-        res.status(400);
-        res.send(he.encode(error.details[0].message));
+        return error.details[0].message;
       }
+
+      return undefined;
     },
   };
 
