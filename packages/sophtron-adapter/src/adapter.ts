@@ -65,7 +65,6 @@ export class SophtronAdapter implements WidgetAdapter {
       if (error) {
         res.status(400);
         res.send(he.encode(error.details[0].message));
-        return;
       }
     },
   };
