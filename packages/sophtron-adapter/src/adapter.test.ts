@@ -1014,14 +1014,9 @@ describe("sophtron adapter", () => {
           },
         };
 
-        const res = {
-          send: jest.fn(),
-          status: jest.fn(),
-        } as unknown as any;
+        dataRequestValidators.transactions(req);
 
-        dataRequestValidators.transactions(req, res);
-
-        expect(validatorSpy).toHaveBeenCalledWith(req, res);
+        expect(validatorSpy).toHaveBeenCalledWith(req);
       });
 
       it("fails aggregator's transactionValidator if start_time is undefined", async () => {
@@ -1032,14 +1027,9 @@ describe("sophtron adapter", () => {
           },
         };
 
-        const res = {
-          send: jest.fn(),
-          status: jest.fn(),
-        } as unknown as any;
+        const validatorResult = dataRequestValidators.transactions(req);
 
-        dataRequestValidators.transactions(req, res);
-
-        expect(res.send).toHaveBeenCalledWith(testDataValidatorStartTimeError);
+        expect(validatorResult).toEqual(testDataValidatorStartTimeError);
       });
 
       it("fails aggregator's transactionValidator if end_time is undefined", async () => {
@@ -1050,14 +1040,9 @@ describe("sophtron adapter", () => {
           },
         };
 
-        const res = {
-          send: jest.fn(),
-          status: jest.fn(),
-        } as unknown as any;
+        const validatorResult =dataRequestValidators.transactions(req);
 
-        dataRequestValidators.transactions(req, res);
-
-        expect(res.send).toHaveBeenCalledWith(testDataRequestValidatorEndTimeError);
+        expect(validatorResult).toEqual(testDataRequestValidatorEndTimeError);
       });
     });
   });

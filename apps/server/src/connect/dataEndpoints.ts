@@ -130,6 +130,7 @@ export const transactionsDataHandler = withValidateAggregatorInPath(
     if (validationError) {
       res.status(400);
       res.send(he.encode(validationError));
+      return;
     }
 
     const { start_time, end_time } = req.query;
