@@ -1,5 +1,5 @@
 import { JobTypes } from "@repo/utils";
-import { generateVcDataTests, visitAgg } from "@repo/utils-dev-dependency";
+import { generateDataTests, visitAgg } from "@repo/utils-dev-dependency";
 import {
   expectConnectionSuccess,
   clickContinue,
@@ -63,5 +63,9 @@ describe("Sophtron aggregator", () => {
     expectConnectionSuccess();
   });
 
-  generateVcDataTests({ makeAConnection });
+  generateDataTests({
+    makeAConnection,
+    shouldTestVcEndpoint: true,
+    transactionsQueryString: "?start_time=2021/1/1&end_time=2022/1/1",
+  });
 });

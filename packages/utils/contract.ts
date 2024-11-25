@@ -38,7 +38,8 @@ export enum MappedJobTypes {
 }
 
 export type AdapterMap = {
-  vcAdapter: Function;
+  dataAdapter?: Function;
+  vcAdapter?: Function;
   widgetAdapter: WidgetAdapter;
   testInstitutionAdapterName?: string;
 };
@@ -226,6 +227,6 @@ export interface WidgetAdapter {
     single_account_select?: boolean,
     userId?: string,
   ) => Promise<Connection | undefined>;
-  RouteHandlers?: Record<string, (req: any, res: any) => Promise<void>>;
+  RouteHandlers?: Record<string, (req: any, res: any) => void>;
   DataRequestValidators?: Record<string, (req: any) => string | undefined>;
 }

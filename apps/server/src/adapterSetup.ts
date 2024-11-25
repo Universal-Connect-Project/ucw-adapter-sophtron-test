@@ -56,7 +56,7 @@ const mxAdapterMapObject: Record<string, AdapterMap> = getMxAdapterMapObject({
 });
 
 // This is where you add adapters
-export const adapterMap = {
+export const adapterMap: Record<string, AdapterMap> = {
   ...templateAdapterMapObject,
   ...mxAdapterMapObject,
   ...sophtronAdapterMapObject,
