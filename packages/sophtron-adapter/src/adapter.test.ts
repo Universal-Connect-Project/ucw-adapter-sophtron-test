@@ -4,6 +4,7 @@ import type {
   UpdateConnectionRequest,
 } from "@repo/utils";
 import { ChallengeType, ConnectionStatus } from "@repo/utils";
+import { aggregatorCredentials } from "test/testData/credentials";
 
 import {
   SOPHTRON_ANSWER_JOB_MFA_PATH,
@@ -32,19 +33,9 @@ import {
 } from "./test/testData/sophtronMember";
 import { server } from "./test/testServer";
 import { SophtronAdapter } from "./adapter";
-import type { ApiCredentials } from "./models";
 import { SOPHTRON_ADAPTER_NAME, testDataRequestValidatorEndTimeError, testDataValidatorStartTimeError } from "./constants";
 
 import { logClient } from "./test/utils/logClient";
-
-export const aggregatorCredentials: ApiCredentials = {
-  clientId: "testClientId",
-  secret: "testSecret",
-  endpoint: "https://api.sophtron.com/api",
-  vcEndpoint: "https://vc.sophtron.com/api/",
-  aggregator: SOPHTRON_ADAPTER_NAME,
-  available: true,
-};
 
 const adapter = new SophtronAdapter({
   dependencies: {

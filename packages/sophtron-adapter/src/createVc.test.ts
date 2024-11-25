@@ -2,7 +2,7 @@ import { VCDataTypes } from "@repo/utils";
 
 import type { AdapterDependencies } from "./models";
 import { logClient } from "./test/utils/logClient";
-import { aggregatorCredentials } from "./adapter.test";
+import { aggregatorCredentials } from "./test/testData/credentials";
 import { createSophtronVC } from "./createVc";
 
 import {
