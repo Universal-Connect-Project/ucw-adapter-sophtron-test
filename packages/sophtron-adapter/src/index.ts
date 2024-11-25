@@ -1,5 +1,5 @@
 import { type AdapterMap } from "@repo/utils";
-import { createDataAdapter } from "createDataAdapter";
+import { createDataAdapter } from "./createDataAdapter";
 
 import { SophtronAdapter } from "./adapter";
 import { createSophtronVC } from "./createVc";
