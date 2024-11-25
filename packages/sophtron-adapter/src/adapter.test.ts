@@ -21,7 +21,7 @@ import {
   sophtronInstitutionData,
   sophtronUserInstitutionAccountsData,
 } from "./test/testData/institution";
-import { aggregatorCredentials } from "test/testData/aggregatorCredentials";
+import { aggregatorCredentials } from "./test/testData/aggregatorCredentials";
 import {
   createCustomerData,
   customerFromUniqueIdData,
