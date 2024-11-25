@@ -1,6 +1,6 @@
 import { logClient } from "./test/utils/logClient";
 import { sophtronVcTranscationsData } from "./test/testData/sophtronVcData";
-import { aggregatorCredentials } from "./test/testData/credentials";
+import { aggregatorCredentials } from "test/testData/aggregatorCredentials";
 import { getVc } from "./getVc";
 
 describe("Sophtron Vc Client", () => {

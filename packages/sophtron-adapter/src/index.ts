@@ -1,7 +1,8 @@
-import { type AdapterMap, getDataFromVCJwt } from "@repo/utils";
+import { type AdapterMap } from "@repo/utils";
+import { createDataAdapter } from "createDataAdapter";
 
 import { SophtronAdapter } from "./adapter";
-import { createSophtronVC, type DataParameters } from "./createVc";
+import { createSophtronVC } from "./createVc";
 import type { AdapterDependencies } from "./models";
 
 export const getSophtronAdapterMapObject = (
@@ -9,9 +10,7 @@ export const getSophtronAdapterMapObject = (
 ) => {
   return {
     sophtron: {
-      dataAdapter: async (params: DataParameters) => {
-        return await getDataFromVCJwt(await createSophtronVC(dependencies)(params));
-      },
+      dataAdapter: createDataAdapter(dependencies),
       vcAdapter: createSophtronVC(dependencies),
       widgetAdapter: new SophtronAdapter({
         dependencies,
