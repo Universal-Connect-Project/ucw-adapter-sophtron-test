@@ -1,4 +1,3 @@
-import he from "he";
 import Joi from "joi";
 import type {
   Challenge,
