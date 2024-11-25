@@ -1,6 +1,6 @@
 import { JobTypes } from "@repo/utils";
 import {
-  generateVcDataTests,
+  generateDataTests,
   visitAgg,
   expectConnectionSuccess,
   clickContinue,
@@ -64,5 +64,5 @@ describe("Sophtron aggregator", () => {
     expectConnectionSuccess();
   });
 
-  generateVcDataTests({ makeAConnection });
+  generateDataTests({ makeAConnection, shouldTestVcEndpoint: true });
 });
