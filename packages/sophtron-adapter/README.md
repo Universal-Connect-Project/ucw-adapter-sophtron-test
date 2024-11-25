@@ -42,8 +42,6 @@ const sophtronAdapterMapObject = getSophtronAdapterMapObject({
             password: config.MxApiSecret,
             basePath: 'https://int-api.mx.com',
             vcEndpoint: 'https://int-api.mx.com/',
-            aggregator: 'sophtron',
-            available: true
         },
     },
     envConfig: {
