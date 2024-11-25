@@ -4,7 +4,6 @@ import type {
   UpdateConnectionRequest,
 } from "@repo/utils";
 import { ChallengeType, ConnectionStatus } from "@repo/utils";
-import { aggregatorCredentials } from "test/testData/credentials";
 
 import {
   SOPHTRON_ANSWER_JOB_MFA_PATH,
@@ -22,6 +21,7 @@ import {
   sophtronInstitutionData,
   sophtronUserInstitutionAccountsData,
 } from "./test/testData/institution";
+import { aggregatorCredentials } from "./test/testData/credentials";
 import {
   createCustomerData,
   customerFromUniqueIdData,
