@@ -2,7 +2,7 @@ import type { VCDependencies } from "models";
 import { getVc as getSophtronVc } from "./getVc";
 import { VCDataTypes } from "@repo/utils";
 
-interface GetVCParams {
+export type DataParameters = {
   connectionId: string;
   type: VCDataTypes;
   userId: string;
@@ -19,7 +19,7 @@ export const createSophtronVC = (dependencies: VCDependencies) => {
      startTime,
      type,
      userId,
-   }: GetVCParams) => {
+   }: DataParameters) => {
 
     let path = "";
 
