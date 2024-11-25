@@ -1,6 +1,6 @@
 import { VCDataTypes } from "@repo/utils";
 
-import { createDataAdapter } from "createDataAdapter";
+import { createDataAdapter } from "./createDataAdapter";
 import { logClient } from "./test/utils/logClient";
 import { aggregatorCredentials } from "./test/testData/aggregatorCredentials";
 import type { AdapterDependencies } from "./models";
