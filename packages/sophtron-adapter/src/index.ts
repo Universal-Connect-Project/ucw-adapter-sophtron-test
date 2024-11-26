@@ -8,12 +8,21 @@ import type { AdapterDependencies } from "./models";
 export const getSophtronAdapterMapObject = (
   dependencies: AdapterDependencies,
 ) => {
+  const deps = {
+    ...dependencies,
+    aggregatorCredentials: {
+      ...dependencies.aggregatorCredentials,
+      endpoint: "https://api.sophtron.com/api",
+      vcEndpoint: "https://vc.sophtron.com/api/",
+    },
+  };
+
   return {
     sophtron: {
-      dataAdapter: createDataAdapter(dependencies),
-      vcAdapter: createSophtronVC(dependencies),
+      dataAdapter: createDataAdapter(deps),
+      vcAdapter: createSophtronVC(deps),
       widgetAdapter: new SophtronAdapter({
-        dependencies,
+        dependencies: deps,
       }),
     } as AdapterMap,
   } as Record<string, AdapterMap>;
