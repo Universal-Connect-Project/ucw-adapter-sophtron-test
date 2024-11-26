@@ -15,7 +15,11 @@ export default class SophtronBaseClient {
   constructor(args: AdapterDependencies) {
     const { aggregatorCredentials, logClient, envConfig } = args;
 
-    this.apiConfig = aggregatorCredentials;
+    this.apiConfig = {
+      ...aggregatorCredentials,
+      endpoint: "https://api.sophtron.com/api",
+      vcEndpoint: "https://vc.sophtron.com/api/",
+    };
     this.logClient = logClient;
     this.envConfig = envConfig;
     this.httpClient = new HttpClient(args);
