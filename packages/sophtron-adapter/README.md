@@ -37,10 +37,8 @@ Next, look for the line that starts with `export const adapterMap = {`, and add 
 const sophtronAdapterMapObject = getSophtronAdapterMapObject({
     logClient: logger,
     aggregatorCredentials: {
-        sophtron: {
-            username: config.SophtronApiUserId,
-            password: config.SophtronApiUserSecret,
-        },
+        username: config.SophtronApiUserId,
+        password: config.SophtronApiUserSecret,
     },
     envConfig: {
         HOSTURL: config.HOSTURL
