@@ -16,8 +16,6 @@ const sophtronAdapterMapObject: Record<string, AdapterMap> =
     aggregatorCredentials: {
       clientId: config.SophtronApiUserId,
       secret: config.SophtronApiUserSecret,
-      endpoint: config.SophtronApiServiceEndpoint,
-      vcEndpoint: config.SophtronVCServiceEndpoint,
     },
     envConfig: {
       HOSTURL: config.HOSTURL,

@@ -21,7 +21,7 @@ export const getVc = async (path: string, args: VCDependencies) => {
 
   const ret: VcResponse = (
     await axios({
-      url: `${vcEndpoint}vc/${path}`,
+      url: `${vcEndpoint}/vc/${path}`,
       method: "get",
       headers,
     })

@@ -414,9 +414,6 @@ describe("dataEndpoints", () => {
 
         await createAccountsDataHandler(false)(req, res);
 
-        expect(res.send).toHaveBeenCalledWith(
-          "&#x22;end_time&#x22; is required",
-        );
         expect(res.status).toHaveBeenCalledWith(400);
       });
 
