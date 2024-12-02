@@ -1,5 +1,8 @@
 import type { Response } from "express";
 import he from "he";
+
+import { getDataFromVCJwt } from "@repo/utils";
+
 import { transactionsResponse } from "../test-adapter/vcResponses";
 import { testDataRequestValidatorStartTimeError } from "../test-adapter/constants";
 import * as adapterIndex from "../adapterIndex";
@@ -21,7 +24,6 @@ import {
 import type { Aggregator } from "../shared/contract";
 import { Aggregators } from "../shared/contract";
 import { invalidAggregatorString } from "../utils/validators";
-import { getDataFromVCJwt } from "@repo/utils";
 
 /* eslint-disable @typescript-eslint/unbound-method */
 
@@ -489,7 +491,7 @@ describe("dataEndpoints", () => {
         const res = {
           send: jest.fn(),
           status: jest.fn(),
-        } as unknown as any;
+        } as unknown as Response;
 
         await createTransactionsDataHandler(true)(req, res);
 
@@ -534,7 +536,7 @@ describe("dataEndpoints", () => {
         const res = {
           send: jest.fn(),
           status: jest.fn(),
-        } as unknown as any;
+        } as unknown as Response;
 
         await createTransactionsDataHandler(false)(req, res);
 
