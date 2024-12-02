@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { AdapterDependencies, VCDependencies } from "models";
+
+import type { AdapterDependencies, VCDependencies } from "./models";
 import { buildSophtronAuthCode } from "./utils";
 import SophtronClient from "./apiClient.v1";
 
