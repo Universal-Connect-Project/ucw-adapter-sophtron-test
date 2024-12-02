@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 5
+
 for file in ./dist/esm/*.js; do
   echo "Updating $file contents..."
 
